@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: k8s-prom
+spec:
+  serviceAccountName: k8s-prom
+  serviceMonitorSelector:
+    matchExpressions:
+      - {key: k8s-app, operator: Exists}
+  resources:
+    requests:
+      memory: 400Mi
+  enableAdminAPI: false
+  replicas: 2
